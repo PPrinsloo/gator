@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_dockerizing
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - database_gator:/var/lib/postgresql/data
+      - ./dbshell:/docker-entrypoint-initdb.d/
+    networks:
+      - gator
+volumes:
+  database_gator:
+
+networks:
+  gator:
+    driver: bridge
